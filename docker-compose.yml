@@ -1,0 +1,23 @@
+version: '3'
+volumes:
+  db_data:
+      driver: 'local'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+  api:
+    build: ./
+    ports:
+      - "3001:3000"
+    tty: true
+    environment:
+      RAILS_ENV: development
+      VIRTUAL_HOST: api.docker
+    volumes:
+      - ./:/app:cached
