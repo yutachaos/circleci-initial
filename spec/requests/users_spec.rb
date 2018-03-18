@@ -21,7 +21,7 @@ end
 
 
 RSpec.describe "POST /users" , type: :request do
-  it 'Return status code 200' do
+  it 'Return status code 201' do
     print @param
     post '/users', params: { user: FactoryBot.attributes_for(:user) }
     expect(response).to be_success
