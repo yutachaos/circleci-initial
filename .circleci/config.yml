@@ -10,8 +10,8 @@ jobs:
         environment:
           BUNDLE_PATH: vendor/bundle
           DB_HOST: 127.0.0.1
-           DB_USERNAME: 'root'
-           DB_PASSWORD: ''
+          DB_USERNAME: 'root'
+          DB_PASSWORD: ''
           RAILS_ENV: test
       - image: circleci/mysql:5.7
         environment:
@@ -39,21 +39,17 @@ jobs:
       - run:
           name: Database setup
           command: bin/rails db:schema:load --trace
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format progress \
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
+                            --out test_results/rspec.xml \
                             --format progress \
-                            $TEST_FILES
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      - save_cache:
-            - docker-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            -  ~/caches/app.tar
+      - store_test_results:
+          path: test_results
+
 workflows:
   version: 2
   step:
