@@ -18,3 +18,11 @@
 !/tmp/.keep
 
 .byebug_history
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store

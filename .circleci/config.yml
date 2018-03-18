@@ -8,8 +8,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.4-node
         environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           DB_HOST: 127.0.0.1
            DB_USERNAME: 'root'
@@ -42,18 +40,17 @@ jobs:
           name: Database setup
           command: bin/rails db:schema:load --trace
       - run:
-          name: Run spec test
-          command: rake spec
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES
+
       - save_cache:
             - docker-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             -  ~/caches/app.tar
-workflows:
-  version: 2
-  step:
-    jobs:
-      - test
-      - build:
-          filters:
-            branches:
-              only: master
