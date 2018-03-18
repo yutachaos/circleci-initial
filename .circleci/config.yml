@@ -54,3 +54,8 @@ jobs:
             - docker-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             -  ~/caches/app.tar
+workflows:
+  version: 2
+  step:
+    jobs:
+      - test
