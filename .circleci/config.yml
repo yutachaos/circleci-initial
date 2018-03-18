@@ -35,7 +35,7 @@ jobs:
             - vendor/bundle
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:3307 -timeout 1m
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Database setup
           command: bin/rails db:schema:load --trace
