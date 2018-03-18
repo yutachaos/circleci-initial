@@ -43,6 +43,7 @@ jobs:
           name: Database setup
           command: bin/rails db:schema:load --trace
       - type: shell
+        name: Run test
         command: |
           bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \

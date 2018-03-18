@@ -20,7 +20,7 @@
 .byebug_history
 
 # Intellij
-.idea/
+.idea/*
 *.iml
 *.iws
 
