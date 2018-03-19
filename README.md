@@ -3,6 +3,7 @@
 CircleCI入門用のサンプルコード
 https://supporterzcolab.com/event/318/
 
+[![CircleCI](https://circleci.com/gh/yutachaos/circleci-initial.svg?style=svg)](https://circleci.com/gh/yutachaos/circleci-initial)
 ## Requirements
 - ruby, rails, docker
 
@@ -17,6 +18,3 @@ https://supporterzcolab.com/event/318/
 
 ## Test 
 - docker-compose exec api bundle exec rspec
-
-### Batch
-[![CircleCI](https://circleci.com/gh/yutachaos/circleci-initial.svg?style=svg)](https://circleci.com/gh/yutachaos/circleci-initial)
