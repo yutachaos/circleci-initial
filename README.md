@@ -18,3 +18,5 @@ https://supporterzcolab.com/event/318/
 
 ## Test 
 - docker-compose exec api bundle exec rspec
+
+add test
