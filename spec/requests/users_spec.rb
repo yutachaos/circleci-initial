@@ -25,7 +25,7 @@ RSpec.describe "POST /users" , type: :request do
     print @param
     post '/users', params: { user: FactoryBot.attributes_for(:user) }
     expect(response).to be_success
-    expect(response.status).to eq 200
+    expect(response.status).to eq 201
   end
 
   it 'User table record increases by 1' do
